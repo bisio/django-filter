@@ -143,6 +143,11 @@ class DateRangeFilter(ChoiceFilter):
     }
 
     def __init__(self, *args, **kwargs):
+        try:
+            options = kwargs.pop('options')
+            self.options = options
+        except KeyError:
+            pass
         kwargs['choices'] = [(key, value[0]) for key, value in self.options.iteritems()]
         super(DateRangeFilter, self).__init__(*args, **kwargs)
 
